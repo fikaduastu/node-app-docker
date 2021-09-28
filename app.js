@@ -1,8 +1,10 @@
 const express = require('express');
 const conn = require('./db-connection');
 const app = express();
+const dotenv = require('dotenv');
 
-const port = process.env.port || 5000;
+dotenv.config({path:'./.env'});
+const port = process.env.PORT || 5000;
 
 conn.db.connect((error)=>{
     if (error){
