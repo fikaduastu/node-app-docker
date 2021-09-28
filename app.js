@@ -1,5 +1,6 @@
 const express = require('express');
 const conn = require('./db-connection');
+const path = require('path');
 const app = express();
 const dotenv = require('dotenv');
 
@@ -14,8 +15,12 @@ conn.db.connect((error)=>{
        console.log("conneted success");
     }
 });
+
+const publicDirectory = path.join(__dirname,'./public');
+app.use(express.static(publicDirectory));
+app.set('view engine','hbs');
 app.get('/',(req,res)=>{
-    res.send("<h1> This is Homepage</h1>");
+    res.render('index');
 });
 
 app.listen(port,()=>{
